@@ -67,7 +67,7 @@ PROVIDERS_DICT = {
 CONTENT_TYPES_DICT = {'Série': 'show', 'Filme': 'movie'}
 
 
-# Mapeia os géneros
+# Mapeia os gêneros
 GENRES_DICT = {
    'Ação & Aventura': 'act', 'Comédia': 'cmy', 'Documentário': 'doc',
    'Fantasia': 'fnt', 'Terror': 'hrr', 'Música & Musical': 'msc',
@@ -79,7 +79,7 @@ GENRES_DICT = {
 }
 
 
-# Streamings, filme/série e géneros
+# Streamings, filme/série e gêneros
 # para os Combobox e Listbox
 stream_list = [key for key in PROVIDERS_DICT]
 content_type_list = [key for key in CONTENT_TYPES_DICT]
@@ -137,7 +137,7 @@ def mount_query(streaming_listbox, genres_select, items):
     # mas acho que não faz mal também kkk!
     remove_poster()
 
-    # Cria listas de streammings escolhidos e géneros escolhidos.
+    # Cria listas de streammings escolhidos e gêneros escolhidos.
     streamings_list = [
         streaming_listbox.get(i)
         for i in streaming_listbox.curselection()
@@ -215,7 +215,7 @@ def parse_results(results):
     """Cuida de pegar os dados."""
 
     '''
-    Aqui, dependendo da combinação (género, filme/serie etc), pode
+    Aqui, dependendo da combinação (gênero, filme/serie etc), pode
     não achar algum item. Exemplo, se colocar: GloboPlay, Documentário,
     Série e classificação a partir de 6.0, dá erro de KeyError, porque
     (neste caso) não tem poster. Mas quem garante que o globoplay tem
@@ -552,9 +552,9 @@ types_combobox = Combobox(
 types_combobox.place(x=30, y=310)
 
 
-# Género (ação/terror etc)
+# gênero (ação/terror etc)
 genres_label = Label(
-    input_frame, text='Género',
+    input_frame, text='Gênero',
     font=('Roboto 12 bold'), anchor='nw',
     bg=COLOR1, fg=COLOR3
 )
