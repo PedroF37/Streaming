@@ -54,7 +54,7 @@ BASE_URL = 'https://www.justwatch.com'
 BASE_IMAGE_URL = 'https://images.justwatch.com'
 
 
-# Dicionário mapeia os streammings para os códigos
+# Dicionário mapeia os streamings para os códigos
 # deles na url do JustWatch
 PROVIDERS_DICT = {
     'Disney-Plus': 'dnp', 'GloboPlay': 'gop',
@@ -79,7 +79,7 @@ GENRES_DICT = {
 }
 
 
-# Streammings, filme/série e géneros
+# Streamings, filme/série e géneros
 # para os Combobox e Listbox
 stream_list = [key for key in PROVIDERS_DICT]
 content_type_list = [key for key in CONTENT_TYPES_DICT]
@@ -126,7 +126,7 @@ def delete_sugestions():
         showinfo('', 'Não possui sugestões gravadas ainda')
 
 
-def mount_query(streamming_listbox, genres_select, items):
+def mount_query(streaming_listbox, genres_select, items):
     """Cuida de montar a requisição."""
 
     # Aqui, destroi para não acontecer de os labels ficarem colados
@@ -138,9 +138,9 @@ def mount_query(streamming_listbox, genres_select, items):
     remove_poster()
 
     # Cria listas de streammings escolhidos e géneros escolhidos.
-    streammings_list = [
-        streamming_listbox.get(i)
-        for i in streamming_listbox.curselection()
+    streamings_list = [
+        streaming_listbox.get(i)
+        for i in streaming_listbox.curselection()
     ]
 
     genres_list = [
@@ -148,12 +148,12 @@ def mount_query(streamming_listbox, genres_select, items):
         for i in genres_listbox.curselection()
     ]
 
-    if 'TODOS' in streammings_list or not streammings_list:
+    if 'TODOS' in streamings_list or not streamings_list:
         # Lista
-        streamming = list(PROVIDERS_DICT.values())
+        streaming = list(PROVIDERS_DICT.values())
     else:
         # Itens enviados como lista
-        streamming = [PROVIDERS_DICT[i] for i in streammings_list]
+        streaming = [PROVIDERS_DICT[i] for i in streamings_list]
 
     if 'TODOS' in genres_list or not genres_list:
         # Lista
@@ -186,16 +186,16 @@ def mount_query(streamming_listbox, genres_select, items):
             }
         }
 
-    query(streamming, types, genres, rating)
+    query(streaming, types, genres, rating)
 
 
-def query(streamming, types, genres, rating):
+def query(streaming, types, genres, rating):
     """Cuida de fazer a consulta"""
     try:
         just_watch = JustWatch(country='BR')
 
         results = just_watch.search_for_item(
-            providers=streamming,
+            providers=streaming,
             content_types=types,
             genres=genres,
             scoring_filter_types=rating,
@@ -515,24 +515,24 @@ sad_label.place(x=420, y=10)
 # CONFIGURANDO INPUT_FRAME
 
 
-# Streammings
-streammings_label = Label(
-    input_frame, text='Streamming',
+# Streamings
+streamings_label = Label(
+    input_frame, text='Streaming',
     font=('Roboto 12 bold'), anchor='nw',
     bg=COLOR1, fg=COLOR3
 )
-streammings_label.place(x=30, y=20)
+streamings_label.place(x=30, y=20)
 
 
 stream = Variable(value=stream_list)
-streamming_listbox = Listbox(
+streaming_listbox = Listbox(
     input_frame,
     font=('Roboto 10'),
     listvariable=stream,
     selectmode='multiple',
     exportselection=0
 )
-streamming_listbox.place(x=30, y=60)
+streaming_listbox.place(x=30, y=60)
 
 
 # Tipos (filme/serie)
@@ -597,7 +597,7 @@ find_button = Button(
     bg=COLOR1, fg=COLOR3, activebackground=COLOR1,
     activeforeground=COLOR3, image=find_img, cursor='hand2',
     compound='left', anchor='nw', command=lambda: mount_query(
-        streamming_listbox, genres_listbox,
+        streaming_listbox, genres_listbox,
         [types_combobox.get(), rating_combobox.get()]
     )
 )
